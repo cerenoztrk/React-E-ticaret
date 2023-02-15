@@ -1,5 +1,5 @@
 import './App.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Components/Header";
@@ -9,7 +9,19 @@ import Footer from "./Components/Footer";
 
 
 function Musteri() {
+  
+  const navigate = useNavigate();
+ 
   const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
+  
+  useEffect(() => {
+
+    if (!localStorage.getItem("userName"))
+    {
+        navigate('/login', { replace: true });
+    }  
+ 
+  }, [])
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
