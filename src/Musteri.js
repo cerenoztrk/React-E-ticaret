@@ -12,6 +12,7 @@ function Musteri() {
   
   const navigate = useNavigate();
  
+
   const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {

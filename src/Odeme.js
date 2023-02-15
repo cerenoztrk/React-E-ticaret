@@ -5,10 +5,20 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
 
-
+import {useNavigate} from "react-router-dom";
 
 function Odeme() {
   const[allPayments, setAllPayments] = useState([]); // useState ilk değeri yok demektir 
+  const navigate = useNavigate();
+  useEffect(() => {
+
+    if (!localStorage.getItem("userName"))
+    {
+        navigate('/login', { replace: true });
+    }  
+ 
+  }, [])
+ 
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   

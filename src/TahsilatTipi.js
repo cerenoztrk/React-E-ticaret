@@ -3,13 +3,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import {useNavigate} from "react-router-dom";
 
 
 
 
 function Sehir() {
+  const navigate = useNavigate();
+
   const[allCollectionTypes, setAllCollectionTypes] = useState([]); // useState ilk değeri yok demektir 
+  useEffect(() => {
+
+    if (!localStorage.getItem("userName"))
+    {
+        navigate('/login', { replace: true });
+    }  
  
+  }, [])
+  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
     const getAllCollectionTypesInfo = async () => {
