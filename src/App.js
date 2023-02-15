@@ -35,6 +35,7 @@ function App() {
           <Route path="/Sehir" element={<Sehir />} />
           <Route path="/TahsilatTipi" element={<TahsilatTipi />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Logout" element={<Logout />} />
           <Route path="/TahsilatTipi" element={<TahsilatTipi />} />
           <Route path="/UrunKategorisi" element={<UrunKategorisi />} />
         </Routes>
