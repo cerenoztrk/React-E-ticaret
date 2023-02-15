@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 
-function Login() {
+function Login() {  
 
 
   const[name, setName] = useState(); 
@@ -43,7 +43,7 @@ function Login() {
          // alert("basarısız");
     }
     
-    console.log("Resp" + result);
+    console.log("Resp: " + result);
     
 
     // if (response.data.result=="success") {
