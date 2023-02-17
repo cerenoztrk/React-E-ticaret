@@ -19,6 +19,7 @@ function YeniMusteri() {
   const[city, setCity] = useState(); 
 
   const [cities, setCities] = useState([]); 
+  const [genders, setGenders] = useState([]);
 
 
   const myButtonClick = async () => {
@@ -49,6 +50,16 @@ function YeniMusteri() {
     {
         navigate('/login', { replace: true });
     }  
+
+    const getGenders = async () => {
+          let response1 = await axios.get(
+            'https://private-a420f-cerenozturk.apiary-mock.com/cinsiyet'
+          );
+
+          setGenders(response1.data.CinsiyetListesi);
+    }
+
+    getGenders().catch(console.error);
 
     const getCities = async () => {
       let response = await axios.get(
@@ -385,7 +396,7 @@ function YeniMusteri() {
                   <div className="form-group form-md-line-input">
                     <label className="col-md-2 control-label" htmlFor="dtBirthDate">Doğum Tarihi</label>
                     <div className="col-md-10">
-                      <input type="text" className="form-control" id="form_control_1" placeholder="GG/AA/YYYY" onChange={e=>setBirthday(e.target.value)} />
+                      <input autoComplete='off' type="text" className="form-control" id="form_control_1" placeholder="GG/AA/YYYY" onChange={e=>setBirthday(e.target.value)} />
                       <div className="form-control-focus">
                       </div>
                     </div>
@@ -394,23 +405,21 @@ function YeniMusteri() {
                     <label className="col-md-2 control-label" htmlFor="rdGender">Cinsiyet </label>
                     <div className="col-md-10">
                       <div className="md-radio-inline">
+                      {
+                        genders.map((data) => (
                         <div className="md-radio">
-                          <input type="radio" id="radio53" name="rdGender" className="md-radiobtn" onChange={e=>setGender('k')}/>
-                          <label htmlFor="radio53">
+                        <input type="radio" id={data.CinsiyetID} name="rdGender" className="md-radiobtn" onChange={e=>setGender('k')}/>
+                          <label htmlFor={data.CinsiyetID} >
                             <span />
                             <span className="check" />
-                            <span className="box" />
-                            Kadın </label>
-                        </div>
-                        <div className="md-radio has-error">
-                          <input type="radio" id="radio54" name="rdGender" className="md-radiobtn" onChange={e=>setGender('e')} />
-                          <label htmlFor="radio54">
-                            <span />
-                            <span className="check" />
-                            <span className="box" />
-                            Erkek </label>
-                        </div>
+                            <span className="box" /> 
+                            {data.Cinsiyet} {" "}
+                          </label>
                       </div>
+                      ))
+                      }
+                      </div>
+
                     </div>
                   </div>
                   <div className="form-group form-md-line-input">
@@ -443,7 +452,6 @@ function YeniMusteri() {
                     <div className="col-md-offset-2 col-md-10">
                       <a className="btn blue" onClick={()=>myButtonClick()}>Kaydet</a>
                       <a className="btn default" onClick={()=>myButtonClick()}>Temizle</a>
-                    
                     </div>
                   </div>
                 </div>
@@ -464,6 +472,6 @@ function YeniMusteri() {
 </>
 
   );
-              }
+  }
 
 export default YeniMusteri;
