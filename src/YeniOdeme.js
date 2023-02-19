@@ -13,7 +13,7 @@ function YeniOdeme() {
   const navigate = useNavigate();
  
 
-  const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
+  const[allPayments, setAllPayments] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {
 
@@ -26,18 +26,18 @@ function YeniOdeme() {
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
-    const getAllCustomersInfo = async () => {
+    const getAllPaymentsInfo = async () => {
         let response = await axios.get(
             'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
             );
     
-            console.log("getAllCustomersInfo" + response.data.MusteriListesi);
+            console.log("getAllPaymentsInfo" + response.data.OdemeListesi);
 
-            setAllCustomers(response.data.MusteriListesi);
+            setAllPayments(response.data.OdemeListesi);
 
     }
     // call the function
-    getAllCustomersInfo().catch(console.error);
+    getAllPaymentsInfo().catch(console.error);
  
   }, [])
   return (
@@ -54,7 +54,7 @@ function YeniOdeme() {
         {/* BEGIN PAGE TITLE */}
         <div className="page-title">
           <h1>
-            Müşteri <small>Yeni Kayıt</small>
+            Ödeme <small>Yeni Kayıt</small>
           </h1>
         </div>
         {/* END PAGE TITLE */}
@@ -306,11 +306,11 @@ function YeniOdeme() {
             <i className="fa fa-circle" />
           </li>
           <li>
-            <a href="#">Müşteri</a>
+            <a href="#">Ödeme</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            < Link to ="/YeniMusteri"> Yeni Kayıt </ Link>
+            < Link to ="/YeniOdeme"> Yeni Kayıt </ Link>
           </li>
         </ul>
         {/* END PAGE BREADCRUMB */}
