@@ -13,7 +13,7 @@ function YeniTahsilat() {
   const navigate = useNavigate();
  
 
-  const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
+  const[allCollections, setAllCollections] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {
 
@@ -26,18 +26,18 @@ function YeniTahsilat() {
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
-    const getAllCustomersInfo = async () => {
+    const getAllCollectionsInfo = async () => {
         let response = await axios.get(
             'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
             );
     
-            console.log("getAllCustomersInfo" + response.data.MusteriListesi);
+            console.log("getAllCollectionsInfo" + response.data.MusteriListesi);
 
-            setAllCustomers(response.data.MusteriListesi);
+            setAllCollections(response.data.MusteriListesi);
 
     }
     // call the function
-    getAllCustomersInfo().catch(console.error);
+    getAllCollectionsInfo().catch(console.error);
  
   }, [])
   return (
@@ -54,7 +54,7 @@ function YeniTahsilat() {
         {/* BEGIN PAGE TITLE */}
         <div className="page-title">
           <h1>
-            Müşteri <small>Yeni Kayıt</small>
+            Yeni Tahsilat <small>Yeni Kayıt</small>
           </h1>
         </div>
         {/* END PAGE TITLE */}
@@ -306,11 +306,11 @@ function YeniTahsilat() {
             <i className="fa fa-circle" />
           </li>
           <li>
-            <a href="#">Müşteri</a>
+            <a href="#">Yeni Tahsilat</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            < Link to ="/YeniMusteri"> Yeni Kayıt </ Link>
+            < Link to ="/YeniTahsilat"> Yeni Kayıt </ Link>
           </li>
         </ul>
         {/* END PAGE BREADCRUMB */}
