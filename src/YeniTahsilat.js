@@ -28,12 +28,12 @@ function YeniTahsilat() {
   
     const getAllCollectionsInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/tahsilat'
             );
     
-            console.log("getAllCollectionsInfo" + response.data.MusteriListesi);
+            console.log("getAllCollectionsInfo" + response.data.TahsilatListesi);
 
-            setAllCollections(response.data.MusteriListesi);
+            setAllCollections(response.data.TahsilatListesi);
 
     }
     // call the function
@@ -302,11 +302,11 @@ function YeniTahsilat() {
         {/* BEGIN PAGE BREADCRUMB */}
         <ul className="page-breadcrumb breadcrumb">
           <li>
-            <a href="#">Tanımlar</a>
+            <a href="#">Operasyon</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            <a href="#">Yeni Tahsilat</a>
+            <a href="#">Tahsilat</a>
             <i className="fa fa-circle" />
           </li>
           <li>

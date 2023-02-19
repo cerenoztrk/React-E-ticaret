@@ -28,12 +28,12 @@ function YeniSiparis() {
   
     const getAllOrdersInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/siparis'
             );
     
-            console.log("getAllOrdersInfo" + response.data.MusteriListesi);
+            console.log("getAllOrdersInfo" + response.data.SiparisListesi);
 
-            setAllOrders(response.data.MusteriListesi);
+            setAllOrders(response.data.SiparisListesi);
 
     }
     // call the function
@@ -302,7 +302,7 @@ function YeniSiparis() {
         {/* BEGIN PAGE BREADCRUMB */}
         <ul className="page-breadcrumb breadcrumb">
           <li>
-            <a href="#">Tanımlar</a>
+            <a href="#">Operasyon</a>
             <i className="fa fa-circle" />
           </li>
           <li>

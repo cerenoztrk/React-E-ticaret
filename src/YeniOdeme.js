@@ -28,7 +28,7 @@ function YeniOdeme() {
   
     const getAllPaymentsInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/odeme'
             );
     
             console.log("getAllPaymentsInfo" + response.data.OdemeListesi);
@@ -302,7 +302,7 @@ function YeniOdeme() {
         {/* BEGIN PAGE BREADCRUMB */}
         <ul className="page-breadcrumb breadcrumb">
           <li>
-            <a href="#">Tanımlar</a>
+            <a href="#">Operasyon</a>
             <i className="fa fa-circle" />
           </li>
           <li>

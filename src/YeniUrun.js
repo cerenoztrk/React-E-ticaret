@@ -28,7 +28,7 @@ function YeniUrun() {
   
     const getAllProductsInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/urun'
             );
     
             console.log("getAllProductsInfo" + response.data.UrunListesi);

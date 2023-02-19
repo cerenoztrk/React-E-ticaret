@@ -13,7 +13,7 @@ function YeniTahsilatTipi() {
   const navigate = useNavigate();
  
 
-  const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
+  const[allCollectionTypes, setAllCollectionTypes] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {
 
@@ -26,18 +26,18 @@ function YeniTahsilatTipi() {
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
-    const getAllCustomersInfo = async () => {
+    const getAllCollectionTypesInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/tahsilatTipi'
             );
     
-            console.log("getAllCustomersInfo" + response.data.MusteriListesi);
+            console.log("getAllCollectionTypesInfo" + response.data.TahsilatTipiListesi);
 
-            setAllCustomers(response.data.MusteriListesi);
+            setAllCollectionTypes(response.data.TahsilatTipiListesi);
 
     }
     // call the function
-    getAllCustomersInfo().catch(console.error);
+    getAllCollectionTypesInfo().catch(console.error);
  
   }, [])
   return (
@@ -54,7 +54,7 @@ function YeniTahsilatTipi() {
         {/* BEGIN PAGE TITLE */}
         <div className="page-title">
           <h1>
-            Müşteri <small>Yeni Kayıt</small>
+            Tahsilat Tipi <small>Yeni Kayıt</small>
           </h1>
         </div>
         {/* END PAGE TITLE */}
@@ -302,15 +302,15 @@ function YeniTahsilatTipi() {
         {/* BEGIN PAGE BREADCRUMB */}
         <ul className="page-breadcrumb breadcrumb">
           <li>
-            <a href="#">Tanımlar</a>
+            <a href="#">Ekran İçerikleri</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            <a href="#">Müşteri</a>
+            <a href="#">Tahsilat Tipi</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            < Link to ="/YeniMusteri"> Yeni Kayıt </ Link>
+            < Link to ="/YeniTahsilatTipi"> Yeni Kayıt </ Link>
           </li>
         </ul>
         {/* END PAGE BREADCRUMB */}

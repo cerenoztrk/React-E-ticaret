@@ -13,7 +13,7 @@ function YeniSehir() {
   const navigate = useNavigate();
  
 
-  const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
+  const[allCity, setAllCity] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {
 
@@ -26,18 +26,18 @@ function YeniSehir() {
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
-    const getAllCustomersInfo = async () => {
+    const getAllCityInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/sehir'
             );
     
-            console.log("getAllCustomersInfo" + response.data.MusteriListesi);
+            console.log("getAllCityInfo" + response.data.SehirListesi);
 
-            setAllCustomers(response.data.MusteriListesi);
+            setAllCity(response.data.SehirListesi);
 
     }
     // call the function
-    getAllCustomersInfo().catch(console.error);
+    getAllCityInfo().catch(console.error);
  
   }, [])
   return (
@@ -54,7 +54,7 @@ function YeniSehir() {
         {/* BEGIN PAGE TITLE */}
         <div className="page-title">
           <h1>
-            Müşteri <small>Yeni Kayıt</small>
+            Şehir <small>Yeni Kayıt</small>
           </h1>
         </div>
         {/* END PAGE TITLE */}
@@ -302,15 +302,15 @@ function YeniSehir() {
         {/* BEGIN PAGE BREADCRUMB */}
         <ul className="page-breadcrumb breadcrumb">
           <li>
-            <a href="#">Tanımlar</a>
+            <a href="#">Ekran İçerikleri</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            <a href="#">Müşteri</a>
+            <a href="#">Şehir</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            < Link to ="/YeniMusteri"> Yeni Kayıt </ Link>
+            < Link to ="/YeniSehir"> Yeni Kayıt </ Link>
           </li>
         </ul>
         {/* END PAGE BREADCRUMB */}

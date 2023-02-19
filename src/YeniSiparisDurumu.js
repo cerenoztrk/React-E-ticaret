@@ -13,7 +13,7 @@ function YeniSiparisDurumu() {
   const navigate = useNavigate();
  
 
-  const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
+  const[allOrderStatus, setAllOrderStatus] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {
 
@@ -26,18 +26,18 @@ function YeniSiparisDurumu() {
  
   useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
   
-    const getAllCustomersInfo = async () => {
+    const getAllOrderStatusInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'https://private-a420f-cerenozturk.apiary-mock.com/siparisDurumu'
             );
     
-            console.log("getAllCustomersInfo" + response.data.MusteriListesi);
+            console.log("getAllOrderStatusInfo" + response.data.SiparisDurumuListesi);
 
-            setAllCustomers(response.data.MusteriListesi);
+            setAllOrderStatus(response.data.SiparisDurumuListesi);
 
     }
     // call the function
-    getAllCustomersInfo().catch(console.error);
+    getAllOrderStatusInfo().catch(console.error);
  
   }, [])
   return (
@@ -54,7 +54,7 @@ function YeniSiparisDurumu() {
         {/* BEGIN PAGE TITLE */}
         <div className="page-title">
           <h1>
-            Müşteri <small>Yeni Kayıt</small>
+            Sipariş Durumu <small>Yeni Kayıt</small>
           </h1>
         </div>
         {/* END PAGE TITLE */}
@@ -302,15 +302,15 @@ function YeniSiparisDurumu() {
         {/* BEGIN PAGE BREADCRUMB */}
         <ul className="page-breadcrumb breadcrumb">
           <li>
-            <a href="#">Tanımlar</a>
+            <a href="#">Ekran İçerikleri</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            <a href="#">Müşteri</a>
+            <a href="#">Sipariş Durumu</a>
             <i className="fa fa-circle" />
           </li>
           <li>
-            < Link to ="/YeniMusteri"> Yeni Kayıt </ Link>
+            < Link to ="/YeniSiparisDurumu"> Yeni Kayıt </ Link>
           </li>
         </ul>
         {/* END PAGE BREADCRUMB */}
