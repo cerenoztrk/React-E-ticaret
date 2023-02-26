@@ -11,6 +11,20 @@ import Footer from "./Components/Footer";
 function Musteri() {
   
   const navigate = useNavigate();
+
+  const myDeleteClick= async(id) => {
+    axios.delete(`http://localhost:5108/Musteri?vm=${id}`)
+      .then(response => {
+        alert( "Kişi silindi." + response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+      window.location.reload();
+
+      navigate('/Musteri', { replace: true })
+  }
  
 
   const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
@@ -19,7 +33,7 @@ function Musteri() {
 
     if (!localStorage.getItem("userName"))
     {
-        navigate('/login', { replace: true });
+        navigate('/Login', { replace: true });
     }  
  
   }, [])
@@ -28,12 +42,13 @@ function Musteri() {
   
     const getAllCustomersInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
-            );
+             // 'https://private-a420f-cerenozturk.apiary-mock.com/musteri'
+            'http://localhost:5108/Musteri'
+             );
     
-            console.log("getAllCustomersInfo" + response.data.MusteriListesi);
+            console.log("getAllCustomersInfo" + response.data);
 
-            setAllCustomers(response.data.MusteriListesi);
+            setAllCustomers(response.data);
 
     }
     // call the function
@@ -355,12 +370,13 @@ function Musteri() {
                     <> 
                       <tr>
                         <td></td>
-                        <td>{data.MusteriAdi}</td>
-                        <td>{data.MusteriSoyadi}</td>
-                        <td>{data.Cinsiyet}</td>
-                        <td>{data.DogumTarihi}</td>
-                        <td>{data.Adres}</td>
-                        <td>{data.Sehir}</td>
+                        <td>{data.musteriAdi}</td>
+                        <td>{data.musteriSoyadi}</td>
+                        <td>{data.cinsiyet}</td>
+                        <td>{data.dogumTarihi}</td>
+                        <td>{data.adres}</td>
+                        <td>{data.sehir}</td>
+                        <td type="button" className="btn blue" onClick={()=>myDeleteClick(data.id)}>Sil</td>
                         
                       </tr>
                     </>

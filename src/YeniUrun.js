@@ -10,36 +10,79 @@ import Footer from "./Components/Footer";
 
 function YeniUrun() {
   
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  const[productname, setProductname] = useState(); 
+  const[code, setCode] = useState(); 
+  const[price, setPrice] = useState(); 
+  const[currency, setCurrency] = useState(); 
+  const[stock, setStock] = useState(); 
+  const[explanation, setExplanation] = useState(); 
  
+  const [currencies, setCurrencies] = useState([]); 
 
-  const[allProducts, setAllProducts] = useState([]); // useState ilk değeri yok demektir 
+  //const[allProducts, setAllProducts] = useState([]);
   
+  const myButtonClick = async () => {
+    let requestBody = { 
+    urunAdi:productname,
+    kodu:code,
+    fiyat:price,
+    paraBirimi:currency,
+    stok:stock,
+    aciklama:explanation
+    }
+
+    const response = await axios.post(
+      //'https://private-a420f-cerenozturk.apiary-mock.com/musteri',
+     ' http://localhost:5108/Urun ',
+      requestBody
+    );
+
+      let data = response.data;
+      alert( data );
+
+      navigate('/urun', { replace: true })
+
+  }
+
+
   useEffect(() => {
 
     if (!localStorage.getItem("userName"))
     {
         navigate('/login', { replace: true });
     }  
- 
-  }, [])
- 
-  useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
-  
-    const getAllProductsInfo = async () => {
-        let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/urun'
-            );
     
-            console.log("getAllProductsInfo" + response.data.UrunListesi);
-
-            setAllProducts(response.data.UrunListesi);
-
+    const getCurrencies = async () => {
+      let response = await axios.get(
+        'https://private-a420f-cerenozturk.apiary-mock.com/paraBirimi'
+      );
+      setCurrencies(response.data.ParaBirimiListesi);
     }
-    // call the function
-    getAllProductsInfo().catch(console.error);
+
+    getCurrencies().catch(console.error);
+
+    
+    
  
   }, [])
+ 
+  //  useEffect(() => { // sayfa açılır açılmaz çalışması gereken yer.
+  
+  //   const getAllProductsInfo = async () => {
+  //        let response = await axios.get(
+  //            'https://private-a420f-cerenozturk.apiary-mock.com/urun'
+  //         );
+    
+  //           console.log("getAllProductsInfo" + response.data.UrunListesi);
+
+  //           setAllProducts(response.data.UrunListesi);
+
+  //    }
+  //   // call the function
+  //     getAllProductsInfo().catch(console.error);
+ 
+  //  }, [])
   return (
   
    <>
@@ -342,7 +385,7 @@ function YeniUrun() {
               <form role="form" className="form-horizontal">
                 <div className="form-body">
                   <div className="form-group form-md-line-input">
-                    <label className="col-md-2 control-label" htmlFor="form_control_1">Ürün Adı</label>
+                    <label className="col-md-2 control-label" htmlFor="form_control_1" onChange={e=>setProductname(e.target.value)}>Ürün Adı</label>
                     <div className="col-md-10">
                       <input type="text" className="form-control" id="form_control_1" />
                       <div className="form-control-focus">
@@ -350,7 +393,7 @@ function YeniUrun() {
                     </div>
                   </div>
                   <div className="form-group form-md-line-input">
-                    <label className="col-md-2 control-label" htmlFor="form_control_1">Ürün Kodu</label>
+                    <label className="col-md-2 control-label" htmlFor="form_control_1" onChange={e=>setCode(e.target.value)}>Ürün Kodu</label>
                     <div className="col-md-10">
                       <input type="text" className="form-control" id="form_control_1" />
                       <div className="form-control-focus">
@@ -358,7 +401,7 @@ function YeniUrun() {
                     </div>
                   </div>			
                   <div className="form-group form-md-line-input">
-                    <label className="col-md-2 control-label" htmlFor="form_control_1">Ürün Fiyatı</label>
+                    <label className="col-md-2 control-label" htmlFor="form_control_1" onChange={e=>setPrice(e.target.value)}>Ürün Fiyatı</label>
                     <div className="col-md-10">
                       <input type="text" className="form-control" id="form_control_1" />
                       <div className="form-control-focus">
@@ -366,18 +409,22 @@ function YeniUrun() {
                     </div>
                   </div>						
                   <div className="form-group form-md-line-input">
-                    <label className="col-md-2 control-label" htmlFor="form_control_1">Para Birimi</label>
+                    <label className="col-md-2 control-label" htmlFor="form_control_1" onChange={e=>setCurrency(e.target.value)}>Para Birimi</label>
                     <div className="col-md-10">
                       <select className="form-control" id="form_control_1">
                         <option value>Lütfen seçiniz..</option>
-                        <option value>TRY</option>
-                        <option value>EUR</option>
-                        <option value>USD</option>
+                        {
+                            currencies.map((data) => (
+                              <option value={data.ParaBirimiID}>{data.ParaBirimi}</option>
+
+                            )
+                            )
+                          }
                       </select>
                     </div>
                   </div>
                   <div className="form-group form-md-line-input">
-                    <label className="col-md-2 control-label" htmlFor="form_control_1">Stok Adedi</label>
+                    <label className="col-md-2 control-label" htmlFor="form_control_1" onChange={e=>setStock(e.target.value)}>Stok Adedi</label>
                     <div className="col-md-10">
                       <input type="text" className="form-control" id="form_control_1" />
                       <div className="form-control-focus">
@@ -385,7 +432,7 @@ function YeniUrun() {
                     </div>
                   </div>
                   <div className="form-group form-md-line-input has-success">
-                    <label className="col-md-2 control-label" htmlFor="form_control_1">Açıklama</label>
+                    <label className="col-md-2 control-label" htmlFor="form_control_1" onChange={e=>setExplanation(e.target.value)}>Açıklama</label>
                     <div className="col-md-10">
                       <textarea className="form-control" rows={3} defaultValue={""} />
                       <div className="form-control-focus">
@@ -396,8 +443,8 @@ function YeniUrun() {
                 <div className="form-actions">
                   <div className="row">
                     <div className="col-md-offset-2 col-md-10">
-                      <button type="button" className="btn blue">Kaydet</button>
-                      <button type="button" className="btn default">Vazgeç</button>
+                      <button type="button" className="btn blue"  onClick={()=>myButtonClick()}>Kaydet</button>
+                      <button type="button" className="btn default"  onClick={()=>myButtonClick()}>Vazgeç</button>
                     </div>
                   </div>
                 </div>

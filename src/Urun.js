@@ -11,10 +11,10 @@ import Footer from "./Components/Footer";
 
 
 function Urun() {
+ 
   const[allProducts, setAllProducts] = useState([]); // useState ilk değeri yok demektir 
   const navigate = useNavigate();
   
-  const[allCustomers, setAllCustomers] = useState([]); // useState ilk değeri yok demektir 
   
   useEffect(() => {
 
@@ -29,12 +29,13 @@ function Urun() {
   
     const getAllProductsInfo = async () => {
         let response = await axios.get(
-            'https://private-a420f-cerenozturk.apiary-mock.com/urun'
+            // 'https://private-a420f-cerenozturk.apiary-mock.com/urun',
+            'http://localhost:5108/Urun'
             );
     
-            console.log("getAllProductsInfo" + response.data.UrunListesi);
+            console.log("getAllProductsInfo" + response.data);
 
-            setAllProducts(response.data.UrunListesi);
+            setAllProducts(response.data);
 
     }
     // call the function
@@ -357,13 +358,13 @@ function Urun() {
                     <> 
                       <tr>
                         <td></td>
-                        <td>{data.UrunID}</td>
-                        <td>{data.UrunAdi}</td>
-                        <td>{data.Kodu}</td>
-                        <td>{data.Fiyat}</td>
-                        <td>{data.ParaBirimi}</td>
-                        <td>{data.Stok}</td>
-                        <td>{data.Aciklama}</td>
+                        <td>{data.urunId}</td>
+                        <td>{data.urunAdi}</td>
+                        <td>{data.kodu}</td>
+                        <td>{data.fiyat}</td>
+                        <td>{data.paraBirimi}</td>
+                        <td>{data.stok}</td>
+                        <td>{data.aciklama}</td>
                         
                       </tr>
                     </>
